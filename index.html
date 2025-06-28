@@ -5,6 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cricket Game</title>
+  <style>
+    body{
+      text-align: center;
+    }
+  </style>
 </head>
 
 <body>
@@ -32,6 +37,11 @@
       resetScore();
   ">Reset</button>
 
+  <h3 id="user-move"></h3>
+  <h3 id="computer-move"></h3>
+  <h3 id="result"></h3>
+  <h3 id="score"></h3>
+
   <script>
     let scoreStr = localStorage.getItem('Score');
     let score;
@@ -45,8 +55,9 @@
       };
 
       score.displayScore = function () {
-        return `Win:${score.win}, Lost:${score.lost}, Tie:${score.tie}`;
+        return `Score: Win:${score.win}, Lost:${score.lost}, Tie:${score.tie}`;
       };
+      showResult();
     }
 
     function generateComputerChoice() {
@@ -100,9 +111,11 @@
 
     function showResult(userMove, computerMove, result) {
       localStorage.setItem('Score', JSON.stringify(score));
-      alert(`You have chosen ${userMove}. Computer choice is ${computerMove}
-      ${result}
-      ${score.displayScore()}`);
+
+      document.querySelector('#user-move').innerText = userMove ? `You have chosen ${userMove}` : '';
+      document.querySelector('#computer-move').innerText = computerMove ? `Computer choice is ${computerMove}` : '';
+      document.querySelector('#result').innerText = result || '';
+      document.querySelector('#score').innerText = score.displayScore();
     }
   </script>
 </body>
